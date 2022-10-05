@@ -23,13 +23,6 @@ pre#screen {
     font-size: 4px;
 }
 
-canvas#canvas {
-    width: 0;
-    height: 0;
-    z-index: -1;
-    visibility: hidden;
-}
-
 p#fps {
     position: absolute;
     top: 0;
@@ -88,4 +81,12 @@ div#settingsModal {
 
 div#settingsModal * {
     color: black;
+}
+
+canvas,
+video {
+    width: 0;
+    height: 0;
+    z-index: -1;
+    visibility: hidden;
 }
