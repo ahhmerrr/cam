@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ascii Camera</title>
+
+        <link rel="stylesheet" href="styles/index.css" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <p id="fps"></p>
+        <pre id="screen"></pre>
+        <canvas id="canvas"></canvas>
+
+        <p id="nocam">
+            Please allow this website to use your camera if you haven't already.
+        </p>
+        <button type="button" id="startBtn">Start</button>
+
+        <button type="button" id="settingsBtn">Settings</button>
+
+        <div id="settingsModal">
+            <p>This is where the settings will go.</p>
+            <p>One setting</p>
+            <p>Two settings</p>
+            <p>Three!</p>
+        </div>
+
+        <script src="scripts/etc.js"></script>
+        <script src="scripts/sidekick.js"></script>
+        <script src="scripts/index.js"></script>
+        <script src="scripts/events.js"></script>
+    </body>
+</html>

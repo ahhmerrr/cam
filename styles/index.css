@@ -1,0 +1,91 @@
+:root {
+    --background: rgb(36, 30, 55);
+    --foreground: rgb(255, 252, 233);
+    --foreground-hover: rgb(255, 247, 193);
+}
+
+* {
+    font-family: "Noto Sans Mono", "Courier New", Courier, monospace;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--background);
+    color: var(--foreground);
+}
+
+*::selection {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+pre#screen {
+    font-size: 4px;
+}
+
+canvas#canvas {
+    width: 0;
+    height: 0;
+    z-index: -1;
+    visibility: hidden;
+}
+
+p#fps {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    padding: 5px;
+
+    font-size: 14px;
+
+    display: none;
+}
+
+p#nocam {
+    width: 100vw;
+
+    position: absolute;
+    top: 0;
+
+    text-align: center;
+    background: transparent;
+}
+
+button#settingsBtn {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+
+    border: none;
+    outline: none;
+
+    padding: 5px;
+
+    font-size: 14px;
+
+    text-decoration: underline;
+}
+
+button#settingsBtn:hover {
+    text-underline-offset: 2px;
+    background: var(--foreground);
+    color: var(--background);
+}
+
+div#settingsModal {
+    position: absolute;
+
+    left: 20%;
+    right: 20%;
+    top: 20%;
+    bottom: 20%;
+
+    background: var(--foreground);
+    display: none;
+}
+
+div#settingsModal * {
+    color: black;
+}
