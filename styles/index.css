@@ -45,11 +45,9 @@ p#nocam {
     background: transparent;
 }
 
-button#settingsBtn {
+button {
     position: absolute;
     cursor: pointer;
-    top: 0;
-    right: 0;
 
     border: none;
     outline: none;
@@ -61,10 +59,15 @@ button#settingsBtn {
     text-decoration: underline;
 }
 
-button#settingsBtn:hover {
+button:hover {
     text-underline-offset: 2px;
     background: var(--foreground);
     color: var(--background);
+}
+
+button#settingsBtn {
+    top: 0;
+    right: 0;
 }
 
 div#settingsModal {
@@ -81,6 +84,11 @@ div#settingsModal {
 
 div#settingsModal * {
     color: black;
+}
+
+button#startBtn {
+    top: 0;
+    left: 0;
 }
 
 canvas,

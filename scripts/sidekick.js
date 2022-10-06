@@ -1,11 +1,25 @@
-const getAscii = (image = null, draw = canvasElement, color = false) => {
-    canvasElement.width = image.width;
-    canvasElement.height = image.height / 2;
-    draw.getContext("2d").drawImage(image, 0, 0, image.width, image.height / 2);
+const getAscii = (
+    image = null,
+    imageW = undefined,
+    imageH = undefined,
+    draw = canvasElement,
+    color = false
+) => {
+    console.log({ imageW, imageH });
+
+    canvasElement.width = imageW ?? image.width;
+    canvasElement.height = imageH ?? image.height / 2;
+    draw.getContext("2d").drawImage(
+        image,
+        0,
+        0,
+        imageW ?? image.width,
+        imageH ?? image.height / 2
+    );
 
     const imageData = draw
         .getContext("2d")
-        .getImageData(0, 0, image.width, image.height / 2);
+        .getImageData(0, 0, imageW ?? image.width, imageH ?? image.height / 2);
 
     let asciiImage = "";
 
@@ -36,7 +50,11 @@ const getAscii = (image = null, draw = canvasElement, color = false) => {
                 ];
 
             // increment row and add newline if a new row is reached
-            if (i % (imageData.width * pixelLength * divisor) == 0 && i != 0)
+            if (
+                i % ((imageW ?? imageData.width) * pixelLength * divisor) ==
+                    0 &&
+                i != 0
+            )
                 asciiImage += "\n";
         }
     }

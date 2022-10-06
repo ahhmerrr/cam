@@ -10,10 +10,13 @@ const videoElement = document.getElementById("video");
 const nocamElement = document.getElementById("nocam");
 
 const settingsBtnElement = document.getElementById("settingsBtn");
+const startBtnElement = document.getElementById("startBtn");
 const settingsModalElement = document.getElementById("settingsModal");
 
 const pixelLength = 4;
 const divisor = 1;
+
+const camSize = true;
 
 let contrast = 128;
 let brightness = 0;

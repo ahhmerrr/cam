@@ -1,26 +1,35 @@
-// use ImageCapture API
-if ("ImageCapture" in window) {
-    navigator.mediaDevices
-        .getUserMedia({
-            audio: false,
-            video: true,
-        })
-        .then((stream) => camera(stream))
-        .catch((err) => console.log({ err }));
-}
-// use built-in HTML5 video API
-else {
-}
+// get a MediaStream with video but no audio
+navigator.mediaDevices
+    .getUserMedia({
+        audio: false,
+        video: camSize,
+    })
+    .then((stream) => switcher(stream))
+    .catch((err) => console.log({ err }));
 
-const camera = (stream) => {
+const switcher = (stream) => {
     // hide/show extra stuff
     fpsElement.style.display = "block";
     nocamElement.style.display = "none";
+    startBtnElement.style.display = "none";
     playing = true;
 
+    // use ImageCapture API if available
+    if ("ImageCapture" in window) {
+        captureCamera(stream);
+    }
+    // otherwise use built-in HTML5 video API
+    else {
+        videoElement.srcObject = stream;
+        videoElement.play().then(() => {
+            videoCamera(videoElement);
+        });
+    }
+};
+
+const captureCamera = (stream) => {
     // create an ImageCapture object for grabbing frames from the camera
     let capture = new ImageCapture(stream.getVideoTracks()[0]);
-
     let time = 0;
 
     const interval = setInterval(() => {
@@ -29,7 +38,6 @@ const camera = (stream) => {
                 .grabFrame()
                 .then((frame) => {
                     screenElement.innerHTML = getAscii(frame);
-                    nocamElement.style.display = "none";
                 })
                 .catch((err) => {
                     console.log({ err });
@@ -42,9 +50,32 @@ const camera = (stream) => {
 
         if (!running) {
             stream.getVideoTracks()[0].stop();
-            capture.closoe;
+            closeInterval(interval);
+            return;
         }
     }, 1000 / fps);
 };
 
-const otherCamera = (stream) => {};
+const videoCamera = (video) => {
+    let time = 0;
+
+    const interval = setInterval(() => {
+        if (playing) {
+            // with the video element
+            screenElement.innerHTML = getAscii(
+                video,
+                video.videoWidth,
+                video.videoHeight / 2
+            );
+
+            fpsElement.textContent =
+                "fps: " + Math.round((1 / (performance.now() - time)) * 1000);
+            time = performance.now();
+        }
+
+        if (!running) {
+            stream.getVideoTracks()[0].stop();
+            capture.closoe;
+        }
+    }, 1000 / fps);
+};
