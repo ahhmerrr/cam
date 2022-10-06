@@ -4,12 +4,15 @@ navigator.mediaDevices
         audio: false,
         video: camSize,
     })
-    .then((stream) => switcher(stream))
+    .then((stream) => {
+        startBtnElement.addEventListener("click", () => switcher(stream));
+    })
     .catch((err) => console.log({ err }));
 
 const switcher = (stream) => {
     // hide/show extra stuff
     fpsElement.style.display = "block";
+    settingsBtnElement.style.display = "block";
     nocamElement.style.display = "none";
     startBtnElement.style.display = "none";
     playing = true;
