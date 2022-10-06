@@ -5,8 +5,6 @@ const getAscii = (
     draw = canvasElement,
     color = false
 ) => {
-    console.log({ imageW, imageH });
-
     canvasElement.width = imageW ?? image.width;
     canvasElement.height = imageH ?? image.height / 2;
     draw.getContext("2d").drawImage(
@@ -30,7 +28,7 @@ const getAscii = (
         for (let i = 0; i < imageData.data.length; i += pixelLength * divisor) {
             // adjust contrast
             let red = Math.trunc(
-                factor * (imageData.data[i] - 128) + 128
+                factor * (imageData.data[i] - 128) + 128 + brightness
             ).clamp(0, 255);
             let green = Math.trunc(
                 factor * (imageData.data[i + 1] - 128) + 128 + brightness

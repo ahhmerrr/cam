@@ -1,7 +1,6 @@
 :root {
-    --background: rgb(36, 30, 55);
-    --foreground: rgb(255, 252, 233);
-    --foreground-hover: rgb(255, 247, 193);
+    --background: rgb(28, 24, 41);
+    --foreground: rgb(239, 237, 228);
 }
 
 * {
@@ -19,10 +18,6 @@
     color: var(--background);
 }
 
-pre#screen {
-    font-size: 4px;
-}
-
 p#fps {
     position: absolute;
     top: 0;
@@ -35,7 +30,8 @@ p#fps {
     display: none;
 }
 
-p#nocam {
+p#nocam,
+p#error {
     width: 100vw;
 
     position: absolute;
@@ -43,6 +39,10 @@ p#nocam {
 
     text-align: center;
     background: transparent;
+}
+
+p#error {
+    display: none;
 }
 
 button {
@@ -71,6 +71,22 @@ button#settingsBtn {
     right: 0;
 }
 
+button#pauseBtn {
+    display: none;
+    bottom: 0;
+    right: 0;
+}
+
+button#startBtn {
+    top: 0;
+    left: 0;
+}
+
+button#themeBtn {
+    bottom: 0;
+    left: 0;
+}
+
 div#settingsModal {
     position: absolute;
 
@@ -85,11 +101,6 @@ div#settingsModal {
 
 div#settingsModal * {
     color: black;
-}
-
-button#startBtn {
-    top: 0;
-    left: 0;
 }
 
 canvas,
