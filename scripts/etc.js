@@ -24,15 +24,15 @@ const camSize = true;
 
 let contrast = 128;
 let brightness = 128;
-let fps = 60;
+let fps = 30;
 
 let playing = false;
 let running = true;
 
 let fontSize = 2;
 screenElement.style.fontSize = `${fontSize}px`;
-let widthFactor = 0.4;
-let resolution = [240, 480];
+let widthFactor = 0.5;
+let resolution = [640, 480];
 
 Number.prototype.clamp = function (min, max) {
     return Math.min(Math.max(this, min), max);

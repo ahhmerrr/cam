@@ -27,3 +27,21 @@ pauseBtnElement.addEventListener("click", (event) => {
     if (playing) pauseBtnElement.innerHTML = "Pause";
     else pauseBtnElement.innerHTML = "Play";
 });
+
+window.addEventListener("unload", (event) => {
+    videoElement.srcObject.getVideoTracks()[0].stop();
+    return null;
+});
+window.addEventListener("beforeunload", (event) => {
+    videoElement.srcObject.getVideoTracks()[0].stop();
+    return null;
+});
+
+window.onunload = () => {
+    videoElement.srcObject.getVideoTracks()[0].stop();
+    return null;
+};
+window.onbeforeunload = () => {
+    videoElement.srcObject.getVideoTracks()[0].stop();
+    return null;
+};

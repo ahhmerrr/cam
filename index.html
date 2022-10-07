@@ -7,24 +7,19 @@
         <title>Ascii Camera</title>
 
         <link rel="stylesheet" href="styles/index.css" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap"
-            rel="stylesheet"
-        />
     </head>
     <body>
         <p id="fps"></p>
-        <pre id="screen"></pre>
+        <div id="screenWrapper">
+            <pre id="screen"></pre>
+        </div>
         <canvas id="canvas"></canvas>
 
         <p id="nocam">
             Please allow this website to use your camera if you haven't already.
         </p>
 
-        <p id="error">Error occurred, resetting camera object...</p>
+        <p id="error">Error occurred, please try reloading the page</p>
 
         <button type="button" id="startBtn">Start</button>
         <button type="button" id="settingsBtn">Settings</button>

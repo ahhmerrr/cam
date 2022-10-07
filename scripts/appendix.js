@@ -6,13 +6,13 @@ const getAscii = (
     color = false
 ) => {
     canvasElement.width = imageW ?? image.width;
-    canvasElement.height = imageH ?? image.height / 2;
+    canvasElement.height = imageH ?? image.height;
     draw.getContext("2d").drawImage(
         image,
         0,
         0,
         imageW ?? image.width,
-        imageH ?? image.height / 2
+        imageH ?? image.height
     );
 
     const imageData = draw

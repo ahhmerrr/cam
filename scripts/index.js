@@ -31,16 +31,15 @@ const switcher = (stream) => {
 
     // use ImageCapture API if available
     // condition was previously ("ImageCapture" in window)
-    if ("ImageCapture" in window) {
+    if (false) {
         captureCamera(stream);
     }
     // otherwise use built-in HTML5 video API
     else {
-        captureCamera(stream);
-        // videoElement.srcObject = stream;
-        // videoElement.play().then(() => {
-        //     videoCamera(videoElement);
-        // });
+        videoElement.srcObject = stream;
+        videoElement.play().then(() => {
+            videoCamera(videoElement);
+        });
     }
 };
 
@@ -54,7 +53,11 @@ const captureCamera = (stream) => {
     // set an interval, running at "fps" frames per second
     const interval = setInterval(() => {
         // if the user hasn't paused, and the ImageCapture is ready
-        if (playing && capture.track.readyState === "live") {
+        if (
+            playing &&
+            capture.track.readyState === "live" &&
+            capture.track.enabled
+        ) {
             // grab a frame and convert it to ASCII
             capture
                 .grabFrame()
@@ -64,6 +67,7 @@ const captureCamera = (stream) => {
                 // TODO: reset MediaStream on error
                 .catch((err) => {
                     if (err === undefined) return;
+                    console.error(err);
                     errorElement.style.display = "block";
                 });
 
@@ -96,7 +100,7 @@ const videoCamera = (video) => {
             screenElement.innerHTML = getAscii(
                 video,
                 video.videoWidth,
-                video.videoHeight * 0.4
+                video.videoHeight * widthFactor
             );
 
             fpsElement.textContent =
@@ -109,7 +113,7 @@ const videoCamera = (video) => {
             return;
         }
 
-        if (!playing) video.pause();
-        else if (video.paused) video.play();
+        if (!video.paused && !playing) video.pause();
+        else if (video.paused && playing) video.play();
     }, 1000 / fps);
 };
