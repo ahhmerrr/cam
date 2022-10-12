@@ -51,28 +51,24 @@ const interval = setInterval(() => {
 }, 1000 / fps);
 ```
 
-This interval is running at `fps` frames per second; the time of each interval (in seconds) is $1/fps$, so the time of each interval in milliseconds is $1000/fps$.
+This interval is running at `fps` frames per second; the time of each interval (in seconds) is $1/fps$, so the time of each interval in milliseconds is $1000/fps$. Adding content:
 
 ```js
 const interval = setInterval(() => {
-    if (playing) {
-        screenElement.innerHTML = getAscii(
-            video,
-            video.videoWidth,
-            video.videoHeight * widthFactor
-        );
-
-        fpsElement.textContent =
-            "fps: " + Math.round((1 / (performance.now() - time)) * 1000);
-        time = performance.now();
-    }
-
-    if (!running) {
-        clearInterval(interval);
-        return;
-    }
-
-    if (!video.paused && !playing) video.pause();
-    else if (video.paused && playing) video.play();
+    screenElement.innerHTML = getAscii(
+        video,
+        video.videoWidth,
+        video.videoHeight * widthFactor
+    );
 }, 1000 / fps);
 ```
+
+Every $1/fps$ seconds ($1000/fps$ milliseconds), we are sending over the video reference to another function. This is where things start getting interesting.
+
+### Converting images to ASCII
+
+The `getAscii` function is where
+
+---
+
+***README STILL UNDER CONSTRUCTION***
