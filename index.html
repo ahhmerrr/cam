@@ -17,6 +17,20 @@
         />
     </head>
     <body>
+        <nav id="panel">
+            <ul>
+                <li>
+                    <button type="button" id="settingsBtn">Settings</button>
+                </li>
+                <li>
+                    <button type="button" id="themeBtn">Dark</button>
+                </li>
+                <li>
+                    <button type="button" id="pauseBtn">Pause</button>
+                </li>
+            </ul>
+        </nav>
+
         <p id="fps"></p>
         <div id="screenWrapper">
             <pre id="screen"></pre>
@@ -28,13 +42,14 @@
         </p>
 
         <p id="error">Error occurred, please try reloading the page</p>
-
         <button type="button" id="startBtn">Start</button>
-        <button type="button" id="settingsBtn">Settings</button>
-        <button type="button" id="themeBtn">Dark</button>
-        <button type="button" id="pauseBtn">Pause</button>
+        <button type="button" id="infoBtn">Info</button>
 
-        <div id="settingsModal"></div>
+        <div id="backdrop"></div>
+
+        <div id="settingsModal">
+            <input type="range" min="0" max="50" value="10" id="speed-slider" />
+        </div>
 
         <video id="video"></video>
 

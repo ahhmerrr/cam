@@ -1,8 +1,12 @@
 settingsBtnElement.addEventListener("click", (event) => {
     settingsModalElement.style.display =
         settingsModalElement.style.display === "block" ? "none" : "block";
+    backdropElement.style.display =
+        backdropElement.style.display === "block" ? "none" : "block";
 });
 
+// swap foreground and background when transitioning
+// from dark to light mode and vice versa
 themeBtnElement.addEventListener("click", (event) => {
     const prevFore = getComputedStyle(
         document.documentElement
@@ -21,6 +25,7 @@ themeBtnElement.addEventListener("click", (event) => {
     pallette = pallette.reverse();
 });
 
+// handle a pause (easy with the HTML5 video reference)
 pauseBtnElement.addEventListener("click", (event) => {
     playing = !playing;
 
@@ -28,6 +33,7 @@ pauseBtnElement.addEventListener("click", (event) => {
     else pauseBtnElement.innerHTML = "Play";
 });
 
+// close video tracks when page is closed
 window.addEventListener("unload", (event) => {
     videoElement.srcObject.getVideoTracks()[0].stop();
     return null;

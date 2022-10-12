@@ -25,6 +25,7 @@ const switcher = (stream) => {
     fpsElement.style.display = "block";
     settingsBtnElement.style.display = "block";
     pauseBtnElement.style.display = "block";
+    navPanelElement.style.display = "block";
     nocamElement.style.display = "none";
     startBtnElement.style.display = "none";
     playing = true;
