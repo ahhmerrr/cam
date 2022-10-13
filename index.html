@@ -48,7 +48,52 @@
         <div id="backdrop"></div>
 
         <div id="settingsModal">
-            <input type="range" min="0" max="50" value="10" id="speed-slider" />
+            <div class="flex-center">
+                <div class="block">
+                    <div class="flex-center">
+                        <label for="font-slider"
+                            >Font Size:
+                            <span class="inline" id="fontDisplay"></span
+                        ></label>
+                    </div>
+                    <input
+                        type="range"
+                        min="0"
+                        max="20"
+                        value="0"
+                        step="1"
+                        id="fontSlider"
+                    />
+
+                    <div class="flex-center">
+                        <label for="width-slider"
+                            >Width:
+                            <span class="inline" id="widthDisplay"></span
+                        ></label>
+                    </div>
+                    <input
+                        type="range"
+                        min="0"
+                        max="50"
+                        value="10"
+                        id="widthSlider"
+                    />
+
+                    <div class="flex-center">
+                        <label for="height-slider"
+                            >Height:
+                            <span class="inline" id="heightDisplay"></span
+                        ></label>
+                    </div>
+                    <input
+                        type="range"
+                        min="0"
+                        max="50"
+                        value="10"
+                        id="heightSlider"
+                    />
+                </div>
+            </div>
         </div>
 
         <video id="video"></video>

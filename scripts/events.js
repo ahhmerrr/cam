@@ -33,6 +33,43 @@ pauseBtnElement.addEventListener("click", (event) => {
     else pauseBtnElement.innerHTML = "Play";
 });
 
+backdropElement.addEventListener("click", (event) => {
+    settingsModalElement.style.display = "none";
+    backdropElement.style.display = "none";
+});
+
+fontSliderElement.addEventListener("input", () => {
+    fontSize = fontSliderElement.value;
+    screenElement.style.fontSize = `${fontSize}px`;
+
+    fontDisplayElement.innerHTML = `${fontSize}px`;
+    widthDisplayElement.innerHTML = `${resolution[0]} characters`;
+    heightDisplayElement.innerHTML = `${resolution[1]} characters`;
+});
+
+widthSliderElement.addEventListener("input", () => {
+    resolution[0] = widthSliderElement.value;
+
+    fontDisplayElement.innerHTML = `${fontSize}px`;
+    widthDisplayElement.innerHTML = `${resolution[0]} characters`;
+    heightDisplayElement.innerHTML = `${resolution[1]} characters`;
+});
+
+heightSliderElement.addEventListener("input", () => {
+    resolution[1] = heightSliderElement.value;
+
+    fontDisplayElement.innerHTML = `${fontSize}px`;
+    widthDisplayElement.innerHTML = `${resolution[0]} characters`;
+    heightDisplayElement.innerHTML = `${resolution[1]} characters`;
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        settingsModalElement.style.display = "none";
+        backdropElement.style.display = "none";
+    }
+});
+
 // close video tracks when page is closed
 window.addEventListener("unload", (event) => {
     videoElement.srcObject.getVideoTracks()[0].stop();
