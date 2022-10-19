@@ -1,5 +1,5 @@
 // function for getting the ASCII representation of an image
-// TODO: implement in WASM
+// TODO: implement in Wasm
 const getAscii = (
     image = null,
     imageW = undefined,
@@ -12,20 +12,29 @@ const getAscii = (
     canvasElement.width = imageW ?? image.width;
     canvasElement.height = imageH ?? image.height;
 
-    // draw the image (of type ImageBitmap) type to the canvas...
-    draw.getContext("2d").drawImage(
-        image,
-        0,
-        0,
-        imageW ?? image.width,
-        imageH ?? image.height
-    );
+    let imageData = null;
 
-    // ...and get it back from the canvas, receiving
-    // the raw ImageData instead of the ImageBitmap
-    const imageData = draw
-        .getContext("2d")
-        .getImageData(0, 0, imageW ?? image.width, imageH ?? image.height / 2);
+    try {
+        // draw the image (of type ImageBitmap) type to the canvas...
+        context.drawImage(
+            image,
+            0,
+            0,
+            imageW ?? image.width,
+            imageH ?? image.height
+        );
+
+        // ...and get it back from the canvas, receiving
+        // the raw ImageData instead of the ImageBitmap
+        imageData = context.getImageData(
+            0,
+            0,
+            imageW ?? image.width,
+            imageH ?? image.height / 2
+        );
+    } catch (error) {
+        return null;
+    }
 
     let asciiImage = "";
 
@@ -74,4 +83,35 @@ const getAscii = (
     }
 
     return asciiImage;
+};
+
+const resetMedia = (newRes = resolution) => {
+    running = false;
+
+    navigator.mediaDevices
+        .getUserMedia({
+            audio: false,
+            video: {
+                width: fontSize * resolution[0],
+                height: fontSize * resolution[1],
+            },
+        })
+        .then((stream) => {
+            running = true;
+            globalMedia = stream;
+            switcher(globalMedia);
+        })
+        // TODO: display message if user does not have camera/error with opening track
+        .catch((err) => console.log(err));
+};
+
+const refresh = (updateSliders = true) => {
+    if (updateSliders) widthSliderElement.value = resolution[0];
+    widthDisplayElement.innerHTML = resolution[0];
+    widthPixelsDisplayElement.innerHTML =
+        resolution[0] * fontSize * widthFactor;
+
+    if (updateSliders) heightSliderElement.value = resolution[1];
+    heightDisplayElement.innerHTML = resolution[1];
+    heightPixelsDisplayElement.innerHTML = resolution[1] * fontSize;
 };

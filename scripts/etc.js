@@ -11,7 +11,11 @@ const videoElement = document.getElementById("video");
 
 const fontDisplayElement = document.getElementById("fontDisplay");
 const widthDisplayElement = document.getElementById("widthDisplay");
+const widthPixelsDisplayElement = document.getElementById("widthPixelsDisplay");
 const heightDisplayElement = document.getElementById("heightDisplay");
+const heightPixelsDisplayElement = document.getElementById(
+    "heightPixelsDisplay"
+);
 const fpsElement = document.getElementById("fps");
 const nocamElement = document.getElementById("nocam");
 const errorElement = document.getElementById("error");
@@ -21,6 +25,27 @@ const startBtnElement = document.getElementById("startBtn");
 const themeBtnElement = document.getElementById("themeBtn");
 const pauseBtnElement = document.getElementById("pauseBtn");
 const infoBtnElement = document.getElementById("infoBtn");
+const copyBtnElement = document.getElementById("copyBtn");
+
+const presetButtonElements = [
+    document.getElementById("preset1"),
+    document.getElementById("preset2"),
+    document.getElementById("preset3"),
+    document.getElementById("preset4"),
+    document.getElementById("preset5"),
+    document.getElementById("preset6"),
+    document.getElementById("preset7"),
+    document.getElementById("preset8"),
+    document.getElementById("preset9"),
+    document.getElementById("preset10"),
+    document.getElementById("preset11"),
+    document.getElementById("preset12"),
+];
+const invertBtnElement = document.getElementById("invertBtn");
+const halveWidthBtnElement = document.getElementById("halveWidthBtn");
+const halveHeightBtnElement = document.getElementById("halveHeightBtn");
+const doubleWidthBtnElement = document.getElementById("doubleWidthBtn");
+const doubleHeightBtnElement = document.getElementById("doubleHeightBtn");
 
 const fontSliderElement = document.getElementById("fontSlider");
 const widthSliderElement = document.getElementById("widthSlider");
@@ -30,37 +55,47 @@ const backdropElement = document.getElementById("backdrop");
 const settingsModalElement = document.getElementById("settingsModal");
 const navPanelElement = document.getElementById("panel");
 
+const context = canvasElement.getContext("2d", { willReadFrequently: true });
+
 // pixel (letter) font size
-let fontSize = 3;
+let fontSize = 2;
 screenElement.style.fontSize = `${fontSize}px`;
 // width of a monospace character relative to its height
 let widthFactor = 0.5;
 // pixel resolution in characters (NOT pixels)
-let resolution = [120, 240];
 
-let maxResolution = [
-    window.innerWidth / fontSize / widthFactor,
-    window.innerHeight / fontSize,
+// let maxResolution = [
+//     window.innerWidth / fontSize / widthFactor,
+//     window.innerHeight / fontSize,
+// ];
+let maxResolution = [0, 0];
+let resolution = [0, 0];
+
+const presetPixelResolutions = [
+    [192, 144],
+    [854, 480],
+    [640, 360],
+    [426, 240],
+    [1024, 576],
+    [1152, 648],
+    [1280, 720],
+    [1366, 768],
+    [1600, 900],
+    [1920, 1080],
+    [2560, 1440],
+    [3840, 2160],
 ];
 
-console.log({ maxResolution });
-
-fontDisplayElement.innerHTML = `${fontSize}px`;
-widthDisplayElement.innerHTML = `${resolution[0]} characters`;
-heightDisplayElement.innerHTML = `${resolution[1]} characters`;
-
-widthSliderElement.value = resolution[0];
-widthSliderElement.max = maxResolution[0];
-heightSliderElement.value = resolution[1];
-heightSliderElement.max = maxResolution[1];
+fontSliderElement.value = fontSize;
+fontDisplayElement.innerHTML = fontSize;
 
 const pixelLength = 4;
 const divisor = 1;
 
 // camera size
-const camSize = {
-    width: { ideal: resolution[0] * fontSize },
-    height: { ideal: resolution[1] * fontSize * widthFactor },
+let camSize = {
+    width: { ideal: 3840 },
+    height: { ideal: 2160 },
 };
 
 // image contrast
@@ -78,10 +113,3 @@ let running = true;
 Number.prototype.clamp = function (min, max) {
     return Math.min(Math.max(this, min), max);
 };
-
-fontSliderElement.value = fontSize;
-
-widthSliderElement.value = resolution[0];
-widthSliderElement.maxValue = resolution[0];
-
-heightSliderElement.value = resolution[1];

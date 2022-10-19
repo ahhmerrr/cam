@@ -25,6 +25,10 @@ themeBtnElement.addEventListener("click", (event) => {
     pallette = pallette.reverse();
 });
 
+copyBtnElement.addEventListener("click", (event) => {
+    navigator.clipboard.writeText(screenElement.innerText);
+});
+
 // handle a pause (easy with the HTML5 video reference)
 pauseBtnElement.addEventListener("click", (event) => {
     playing = !playing;
@@ -38,36 +42,86 @@ backdropElement.addEventListener("click", (event) => {
     backdropElement.style.display = "none";
 });
 
-fontSliderElement.addEventListener("input", () => {
-    fontSize = fontSliderElement.value;
-    screenElement.style.fontSize = `${fontSize}px`;
-
-    fontDisplayElement.innerHTML = `${fontSize}px`;
-    widthDisplayElement.innerHTML = `${resolution[0]} characters`;
-    heightDisplayElement.innerHTML = `${resolution[1]} characters`;
-});
-
-widthSliderElement.addEventListener("input", () => {
-    resolution[0] = widthSliderElement.value;
-
-    fontDisplayElement.innerHTML = `${fontSize}px`;
-    widthDisplayElement.innerHTML = `${resolution[0]} characters`;
-    heightDisplayElement.innerHTML = `${resolution[1]} characters`;
-});
-
-heightSliderElement.addEventListener("input", () => {
-    resolution[1] = heightSliderElement.value;
-
-    fontDisplayElement.innerHTML = `${fontSize}px`;
-    widthDisplayElement.innerHTML = `${resolution[0]} characters`;
-    heightDisplayElement.innerHTML = `${resolution[1]} characters`;
-});
-
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         settingsModalElement.style.display = "none";
         backdropElement.style.display = "none";
     }
+});
+
+fontSliderElement.addEventListener("input", () => {
+    fontSize = fontSliderElement.value;
+    screenElement.style.fontSize = `${fontSize}px`;
+    fontDisplayElement.innerHTML = fontSize;
+
+    refresh(false);
+});
+
+widthSliderElement.addEventListener("input", () => {
+    resolution[0] = widthSliderElement.value / fontSize / widthFactor;
+
+    refresh(false);
+    resetMedia();
+});
+
+heightSliderElement.addEventListener("input", () => {
+    resolution[1] = heightSliderElement.value / fontSize;
+
+    refresh(false);
+    resetMedia();
+});
+
+presetButtonElements.forEach((presetButton) => {
+    presetButton.addEventListener("click", (event) => {
+        resolution = [
+            parseInt(event.target.innerHTML.split("×")[0]) /
+                fontSize /
+                widthFactor,
+            parseInt(event.target.innerHTML.split("×")[1]) / fontSize,
+        ];
+        console.log(resolution);
+        refresh();
+        resetMedia();
+    });
+});
+
+invertBtnElement.addEventListener("click", (event) => {
+    const prevWidth = resolution[0];
+    const prevHeight = resolution[1];
+
+    resolution[0] = prevHeight;
+    resolution[1] = prevWidth;
+
+    refresh();
+    resetMedia();
+});
+
+doubleWidthBtnElement.addEventListener("click", (event) => {
+    resolution[0] *= 2;
+
+    refresh();
+    resetMedia();
+});
+
+doubleHeightBtnElement.addEventListener("click", (event) => {
+    resolution[1] *= 2;
+
+    refresh();
+    resetMedia();
+});
+
+halveWidthBtnElement.addEventListener("click", (event) => {
+    resolution[0] /= 2;
+
+    refresh();
+    resetMedia();
+});
+
+halveHeightBtnElement.addEventListener("click", (event) => {
+    resolution[1] /= 2;
+
+    refresh();
+    resetMedia();
 });
 
 // close video tracks when page is closed

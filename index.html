@@ -44,6 +44,7 @@
         <p id="error">Error occurred, please try reloading the page</p>
         <button type="button" id="startBtn">Start</button>
         <button type="button" id="infoBtn">Info</button>
+        <button type="button" id="copyBtn">Copy</button>
 
         <div id="backdrop"></div>
 
@@ -54,44 +55,131 @@
                         <label for="font-slider"
                             >Font Size:
                             <span class="inline" id="fontDisplay"></span
-                        ></label>
+                            >px</label
+                        >
                     </div>
                     <input
                         type="range"
                         min="0"
-                        max="20"
+                        max="50"
                         value="0"
                         step="1"
                         id="fontSlider"
                     />
 
                     <div class="flex-center">
-                        <label for="width-slider"
+                        <label for="widthSlider"
                             >Width:
-                            <span class="inline" id="widthDisplay"></span
-                        ></label>
+                            <span class="inline" id="widthDisplay"></span>
+                            characters (<span
+                                class="inline"
+                                id="widthPixelsDisplay"
+                            ></span
+                            >px)</label
+                        >
                     </div>
                     <input
                         type="range"
                         min="0"
-                        max="50"
-                        value="10"
+                        max="0"
+                        value="0"
+                        step="10"
                         id="widthSlider"
                     />
 
                     <div class="flex-center">
-                        <label for="height-slider"
+                        <label for="heightSlider"
                             >Height:
-                            <span class="inline" id="heightDisplay"></span
-                        ></label>
+                            <span class="inline" id="heightDisplay"></span>
+                            characters (<span
+                                class="inline"
+                                id="heightPixelsDisplay"
+                            ></span
+                            >px)</label
+                        >
                     </div>
                     <input
                         type="range"
                         min="0"
-                        max="50"
-                        value="10"
+                        max="0"
+                        value="0"
+                        step="10"
                         id="heightSlider"
                     />
+
+                    <div class="flex">
+                        <hr />
+                    </div>
+
+                    <div class="flex justify-center align-center">
+                        <button type="button" id="preset1">
+                            192&times;144
+                        </button>
+                        <button type="button" id="preset2">
+                            426&times;240
+                        </button>
+                        <button type="button" id="preset3">
+                            640&times;360
+                        </button>
+                        <button type="button" id="preset4">
+                            854&times;480
+                        </button>
+                        <button type="button" id="preset5">
+                            1024&times;576
+                        </button>
+                        <button type="button" id="preset6">
+                            1152&times;648
+                        </button>
+                    </div>
+
+                    <div class="flex justify-center align-center">
+                        <button type="button" id="preset7">
+                            1280&times;720
+                        </button>
+                        <button type="button" id="preset8">
+                            1366&times;768
+                        </button>
+                        <button type="button" id="preset9">
+                            1600&times;900
+                        </button>
+                        <button type="button" id="preset10">
+                            1920&times;1080
+                        </button>
+                        <button type="button" id="preset11">
+                            2560&times;1440
+                        </button>
+                        <button type="button" id="preset12">
+                            3840&times;2160
+                        </button>
+                    </div>
+
+                    <div class="flex">
+                        <hr />
+                    </div>
+
+                    <div class="flex justify-center align-center">
+                        <button type="button" id="doubleWidthBtn">
+                            Double Width
+                        </button>
+                        <button type="button" id="doubleHeightBtn">
+                            Double Height
+                        </button>
+                    </div>
+
+                    <div class="flex justify-center align-center">
+                        <button type="button" id="halveWidthBtn">
+                            Halve Width
+                        </button>
+                        <button type="button" id="halveHeightBtn">
+                            Halve Height
+                        </button>
+                    </div>
+
+                    <div class="flex justify-center align-center">
+                        <button type="button" id="invertBtn">
+                            Invert Dimensions
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

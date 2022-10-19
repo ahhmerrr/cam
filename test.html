@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        pre#testScreen {
+            font-size: 50px;
+            font-weight: bold;
+            /* background: linear-gradient(
+                    0deg,
+                    red 20%,
+                    blue 20%,
+                    blue 40%,
+                    green 40%,
+                    green 60%,
+                    yellow 60%,
+                    yellow 80%,
+                    pink 80%
+                );
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent; */
+        }
+
+        #l1,
+        #l2,
+        #l3,
+        #l4,
+        #l5 {
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+    <body>
+        <pre id="testScreen">
+<span id="l1">0123456789</span>
+<span id="l2">9876543210</span>
+<span id="l3">0123456789</span>
+<span id="l4">9876543210</span>
+<span id="l5">0123456789</span></pre>
+        <script>
+            let str = "";
+            document.getElementById("l1").style.background = `linear-gradient(
+            90deg,
+            red ${
+                document.getElementById("l1").getBoundingClientRect().width / 10
+            }px,
+            blue ${
+                document.getElementById("l1").getBoundingClientRect().width / 10
+            }px,
+            blue ${
+                (document.getElementById("l1").getBoundingClientRect().width /
+                    10) *
+                2
+            }px
+        )`;
+        </script>
+    </body>
+</html>

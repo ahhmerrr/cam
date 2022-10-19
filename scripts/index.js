@@ -1,15 +1,46 @@
+let globalMedia = null;
+
 // * get a MediaStream with video but no audio (only camera)
 navigator.mediaDevices
     .getUserMedia({
         audio: false,
-        video: {
-            width: fontSize * resolution[0],
-            height: fontSize * widthFactor * resolution[1],
-        },
+        video: camSize,
     })
     .then((stream) => {
+        globalMedia = stream;
         // start video when user clicks the start button
-        startBtnElement.addEventListener("click", () => switcher(stream));
+        // fontWidth = fontHeight * widthFactor
+        // font
+
+        for (let i = 0; i < presetPixelResolutions.length; i++) {
+            if (
+                presetPixelResolutions[i][0] > window.innerWidth ||
+                presetPixelResolutions[i][1] >
+                    window.innerHeight - navPanelElement.offsetHeight
+            ) {
+                //1536, 687 ->  1152, 648
+
+                resolution = [
+                    presetPixelResolutions[i - 1][0] / fontSize / widthFactor,
+                    presetPixelResolutions[i - 1][1] / fontSize,
+                ];
+
+                console.log({ resolution });
+                break;
+            }
+        }
+
+        maxResolution = [
+            globalMedia.getVideoTracks()[0].getSettings().width /
+                fontSize /
+                widthFactor,
+            globalMedia.getVideoTracks()[0].getSettings().height / fontSize,
+        ];
+        widthSliderElement.max = maxResolution[0];
+        heightSliderElement.max = maxResolution[1];
+        refresh();
+
+        startBtnElement.addEventListener("click", () => resetMedia());
     })
     // TODO: display message if user does not have camera/error with opening track
     .catch((err) => console.log(err));
@@ -25,7 +56,8 @@ const switcher = (stream) => {
     fpsElement.style.display = "block";
     settingsBtnElement.style.display = "block";
     pauseBtnElement.style.display = "block";
-    navPanelElement.style.display = "block";
+    copyBtnElement.style.display = "block";
+    navPanelElement.style.visibility = "visible";
     nocamElement.style.display = "none";
     startBtnElement.style.display = "none";
     playing = true;
@@ -38,9 +70,12 @@ const switcher = (stream) => {
     // otherwise use built-in HTML5 video API
     else {
         videoElement.srcObject = stream;
-        videoElement.play().then(() => {
-            videoCamera(videoElement);
-        });
+        videoElement
+            .play()
+            .then(() => {
+                videoCamera(videoElement);
+            })
+            .catch((error) => {});
     }
 };
 
@@ -52,7 +87,7 @@ const captureCamera = (stream) => {
     let time = 0;
 
     // set an interval, running at "fps" frames per second
-    const interval = setInterval(() => {
+    globalInterval = setInterval(() => {
         // if the user hasn't paused, and the ImageCapture is ready
         if (
             playing &&
@@ -98,11 +133,12 @@ const videoCamera = (video) => {
         // if the user hasn't paused
         if (playing) {
             // get
-            screenElement.innerHTML = getAscii(
-                video,
-                video.videoWidth,
-                video.videoHeight * widthFactor
-            );
+            screenElement.innerHTML =
+                getAscii(
+                    video,
+                    video.videoWidth,
+                    video.videoHeight * widthFactor
+                ) ?? screenElement.innerHTML;
 
             fpsElement.textContent =
                 "fps: " + Math.round((1 / (performance.now() - time)) * 1000);
@@ -114,7 +150,9 @@ const videoCamera = (video) => {
             return;
         }
 
-        if (!video.paused && !playing) video.pause();
-        else if (video.paused && playing) video.play();
+        try {
+            if (!video.paused && !playing) video.pause();
+            else if (video.paused && playing) video.play();
+        } catch (error) {}
     }, 1000 / fps);
 };
