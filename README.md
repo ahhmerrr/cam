@@ -120,9 +120,9 @@ Here, what we're doing is drawing the image to a canvas, and then getting back r
 
 When drawing to the canvas, we are using the image's default width and height. However, because an ASCII character is taller than it is wide (rectangular), and a pixel is perfectly square, there has to be some "smushing" (vertical compression) done to the image retrieved from the canvas, so that we can represent each pixel in the unaltered image as a normal ASCII character.
 
-```diff
-! **NOTE**: be sure to use a monospaced font, or this won't work. With a monospaced font, characters have the same width, so it is possible to use them as "pixels".
-```
+**NOTES**:
+
+- be sure to use a monospaced font, or this won't work. With a monospaced font, characters have the same width, so it is possible to use them as "pixels".
 
 The value I found that works best for `widthFactor` is $0.5$.
 
@@ -341,6 +341,4 @@ And there you have it! You should now be able to create such a program by yourse
 
 ---
 
-```diff
-@@Please create an issue or otherwise LMK via email if you have any suggestions to the README.@@
-```
+**Please create an issue or otherwise LMK via email if you have any suggestions to the README.**
