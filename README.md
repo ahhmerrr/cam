@@ -203,7 +203,142 @@ Finally, we have to calculate the perceived brightness of the pixel. Remember th
     $B=0.2126*r+0.7152*g+0.0722b$
 where $r$, $g$, and $b$ are the pixel's red, green, and blue values. This formula is based on the idea that the human eye is most sensitive to green light, then red, and then blue.
 
-Once we have our perceived brightness, we are now ready to convert the pixel to an ASCII character. First, though, we need a pallette of characters to choose from. The larger your pallette, the more resolution
+Once we have our perceived brightness, we are now ready to convert the pixel to an ASCII character. First, though, we need a palette of characters to choose from. The larger your palette, the more pixel "diversity" and the better gradients and contours will look. I chose the following character palette:
+
+```$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'.```
+
+This is ordered from highest "brightness" to lowest (or vice versa, if you're using black text on a white background). The `$` character is the "brightest" (or darkest, if your text color is white) and the `.` character is the "darkest" (again, or brightest). Keep in mind that this is all just perceived brightness.
+
+Implementing this palette, and now storing the character chosen from the palette in the buffer:
+
+```js
+function getAscii(image) {
+    canvas.width = image.width;
+    canvas.height = image.height;
+
+    let imageData = null;
+
+    // obtain raw image data for image
+    context.drawImage(
+        image,
+        0,
+        0,
+        image.width,
+        image.height
+    );
+    imageData = context.getImageData(
+        0,
+        0,
+        image.width,
+        image.height * widthFactor
+    );
+
+    let asciiImage = "";
+    
+    const pallette =
+        "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'."
+            .split("")
+
+    const factor = ((259 * (255 + contrast)) / 255) * (259 - contrast);
+
+    for (let i = 0; i < imageData.data.length; i += pixelLength) {
+        let red = Math.trunc(factor * (imageData.data[i] - 128) + 128);
+        let green = Math.trunc(factor * (imageData.data[i + 1] - 128) + 128);
+        let blue = Math.trunc(factor * (imageData.data[i + 2] - 128) + 128);
+
+        red += brightness;
+        blue += brightness;
+        green += brightness;
+
+        if (red > 255) red = 255;
+        if (green > 255) green = 255;
+        if (blue > 255) blue = 255;
+
+        if (red < 0) red = 0;
+        if (green < 0) green = 0;
+        if (blue < 0) blue = 0;
+
+        const pixelBrightness =
+            0.2126 * red + 0.7152 * green + 0.0722 * blue;
+        
+        asciiImage +=
+            pallette[
+                Math.round((pixelBrightness / 255) * (pallette.length - 1))
+            ];
+    }
+
+    return asciiImage;
+};
+```
+
+We are now adding a character onto the `asciiImage` variable, based on `pixelBrightness`. We are almost done; we just have one problem! The entire image is stored in one line. To fix this, we have to add a newline after every row. However, since we are working with a 1D array, detecting row boundaries is a bit more difficult. The completed code is as such:
+
+```js
+function getAscii(image) {
+    canvas.width = image.width;
+    canvas.height = image.height;
+
+    let imageData = null;
+
+    // obtain raw image data for image
+    context.drawImage(
+        image,
+        0,
+        0,
+        image.width,
+        image.height
+    );
+    imageData = context.getImageData(
+        0,
+        0,
+        image.width,
+        image.height * widthFactor
+    );
+
+    let asciiImage = "";
+    
+    const pallette =
+        "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'."
+            .split("")
+
+    const factor = ((259 * (255 + contrast)) / 255) * (259 - contrast);
+
+    for (let i = 0; i < imageData.data.length; i += pixelLength) {
+        if (i % (imageData.width * 4) === 0 && i !== 0)
+            asciiImage += "\n";
+
+        let red = Math.trunc(factor * (imageData.data[i] - 128) + 128);
+        let green = Math.trunc(factor * (imageData.data[i + 1] - 128) + 128);
+        let blue = Math.trunc(factor * (imageData.data[i + 2] - 128) + 128);
+
+        red += brightness;
+        blue += brightness;
+        green += brightness;
+
+        if (red > 255) red = 255;
+        if (green > 255) green = 255;
+        if (blue > 255) blue = 255;
+
+        if (red < 0) red = 0;
+        if (green < 0) green = 0;
+        if (blue < 0) blue = 0;
+
+        const pixelBrightness =
+            0.2126 * red + 0.7152 * green + 0.0722 * blue;
+        
+        asciiImage +=
+            pallette[
+                Math.round((pixelBrightness / 255) * (pallette.length - 1))
+            ];
+    }
+
+    return asciiImage;
+};
+```
+
+The additional statement appends a newline every time the counter is a multiple of row size (multiplied by the length of each pixel: 4, since each pixel has R, G, B, and A values) AND the counter is not 0. This should be fairly obvious.
+
+And there you have it! You should now be able to create such a program by yourself; in the meantime, enjoy!
 
 ---
 
