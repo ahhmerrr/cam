@@ -8,11 +8,10 @@ If you have any features to suggest, or bugs to report, please create a new issu
 
 ## How it Works
 
-```diff
-! NOTES:
-* I am presenting a simplified version here, with the premise that you wish to replicate it yourself. I have added a lot more functionality than the project represented by this simple guide in my own project.
-* This guide assumes the screen (background) is black or some other dark color, and the "pixels" (characters) are white.
-```
+**NOTES**:
+
+- I am presenting a simplified version here, with the premise that you wish to replicate it yourself. I have added a lot more functionality than the project represented by this simple guide in my own project.
+- This guide assumes the screen (background) is black or some other dark color, and the "pixels" (characters) are white.
 
 The key idea for this project is that each pixel has an *apparent brightness*. No color is technically "bright" or "dark"; it's just how bright/dark it *appears* to the human eye.
 
