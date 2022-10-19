@@ -1,3 +1,5 @@
+// TODO: implement "flip" button
+
 let globalMedia = null;
 
 // * get a MediaStream with video but no audio (only camera)
@@ -18,14 +20,11 @@ navigator.mediaDevices
                 presetPixelResolutions[i][1] >
                     window.innerHeight - navPanelElement.offsetHeight
             ) {
-                //1536, 687 ->  1152, 648
-
                 resolution = [
                     presetPixelResolutions[i - 1][0] / fontSize / widthFactor,
                     presetPixelResolutions[i - 1][1] / fontSize,
                 ];
 
-                console.log({ resolution });
                 break;
             }
         }
@@ -75,7 +74,9 @@ const switcher = (stream) => {
             .then(() => {
                 videoCamera(videoElement);
             })
-            .catch((error) => {});
+            .catch((err) => {
+                console.log(err);
+            });
     }
 };
 
@@ -153,6 +154,6 @@ const videoCamera = (video) => {
         try {
             if (!video.paused && !playing) video.pause();
             else if (video.paused && playing) video.play();
-        } catch (error) {}
+        } catch (err) {}
     }, 1000 / fps);
 };

@@ -32,7 +32,8 @@ const getAscii = (
             imageW ?? image.width,
             imageH ?? image.height / 2
         );
-    } catch (error) {
+    } catch (err) {
+        console.log(err);
         return null;
     }
 
@@ -47,7 +48,13 @@ const getAscii = (
     }
     // otherwise
     else {
-        for (let i = 0; i < imageData.data.length; i += pixelLength * divisor) {
+        for (let i = 0; i < imageData.data.length; i += pixelLength) {
+            if (
+                i % ((imageW ?? imageData.width) * pixelLength) === 0 &&
+                i !== 0
+            )
+                asciiImage += "\n";
+
             // adjust contrast
             let red = (
                 Math.trunc(factor * (imageData.data[i] - 128) + 128) +
@@ -73,12 +80,6 @@ const getAscii = (
                 ];
 
             // increment row and add newline if a new row is reached
-            if (
-                i % ((imageW ?? imageData.width) * pixelLength * divisor) ===
-                    0 &&
-                i !== 0
-            )
-                asciiImage += "\n";
         }
     }
 

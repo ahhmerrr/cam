@@ -79,7 +79,7 @@ presetButtonElements.forEach((presetButton) => {
                 widthFactor,
             parseInt(event.target.innerHTML.split("×")[1]) / fontSize,
         ];
-        console.log(resolution);
+
         refresh();
         resetMedia();
     });

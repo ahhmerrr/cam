@@ -90,7 +90,6 @@ fontSliderElement.value = fontSize;
 fontDisplayElement.innerHTML = fontSize;
 
 const pixelLength = 4;
-const divisor = 1;
 
 // camera size
 let camSize = {
