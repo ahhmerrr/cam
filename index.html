@@ -53,8 +53,24 @@
             <div class="flex-center">
                 <div class="block">
                     <div class="flex-center">
+                        <label for="zoom-slider"
+                            >Zoom:
+                            <span class="inline" id="zoomDisplay"></span
+                            >x</label
+                        >
+                    </div>
+                    <input
+                        type="range"
+                        min="0"
+                        max="50"
+                        value="0"
+                        step="1"
+                        id="zoomSlider"
+                    />
+
+                    <div class="flex-center">
                         <label for="font-slider"
-                            >Font Size:
+                            >Font ("Pixel") Size:
                             <span class="inline" id="fontDisplay"></span
                             >px</label
                         >

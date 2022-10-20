@@ -49,9 +49,15 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+zoomSliderElement.addEventListener("input", () => {
+    zoom = zoomSliderElement.value;
+    screenElement.style.fontSize = `${fontSize * zoom}px`;
+    zoomDisplayElement.innerHTML = zoom;
+});
+
 fontSliderElement.addEventListener("input", () => {
     fontSize = fontSliderElement.value;
-    screenElement.style.fontSize = `${fontSize}px`;
+    screenElement.style.fontSize = `${fontSize * zoom}px`;
     fontDisplayElement.innerHTML = fontSize;
 
     refresh(false);

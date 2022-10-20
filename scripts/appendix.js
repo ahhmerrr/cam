@@ -106,9 +106,6 @@ const resetMedia = (newRes = resolution) => {
 };
 
 const refresh = (updateSliders = true) => {
-    console.log("resolution in refresh:");
-    console.log({ resolution });
-
     if (updateSliders) widthSliderElement.value = resolution[0];
     widthDisplayElement.innerHTML = resolution[0];
     widthPixelsDisplayElement.innerHTML =

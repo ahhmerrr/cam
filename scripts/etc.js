@@ -9,6 +9,7 @@ const screenElement = document.getElementById("screen");
 const canvasElement = document.getElementById("canvas");
 const videoElement = document.getElementById("video");
 
+const zoomDisplayElement = document.getElementById("zoomDisplay");
 const fontDisplayElement = document.getElementById("fontDisplay");
 const widthDisplayElement = document.getElementById("widthDisplay");
 const widthPixelsDisplayElement = document.getElementById("widthPixelsDisplay");
@@ -47,6 +48,7 @@ const halveHeightBtnElement = document.getElementById("halveHeightBtn");
 const doubleWidthBtnElement = document.getElementById("doubleWidthBtn");
 const doubleHeightBtnElement = document.getElementById("doubleHeightBtn");
 
+const zoomSliderElement = document.getElementById("zoomSlider");
 const fontSliderElement = document.getElementById("fontSlider");
 const widthSliderElement = document.getElementById("widthSlider");
 const heightSliderElement = document.getElementById("heightSlider");
@@ -58,8 +60,9 @@ const navPanelElement = document.getElementById("panel");
 const context = canvasElement.getContext("2d", { willReadFrequently: true });
 
 // pixel (letter) font size
-let fontSize = 2;
-screenElement.style.fontSize = `${fontSize}px`;
+let zoom = 1;
+let fontSize = 4;
+screenElement.style.fontSize = `${fontSize * zoom}px`;
 // width of a monospace character relative to its height
 let widthFactor = 0.5;
 // pixel resolution in characters (NOT pixels)
@@ -85,6 +88,9 @@ const presetPixelResolutions = [
 
 fontSliderElement.value = fontSize;
 fontDisplayElement.innerHTML = fontSize;
+
+zoomSliderElement.value = zoom;
+zoomDisplayElement.innerHTML = zoom;
 
 const pixelLength = 4;
 
