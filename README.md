@@ -4,7 +4,7 @@
 
 See your face as a pool of $'s, ]'s, and ^'s.
 
-If you have any features to suggest, or bugs to report, please create a new issue and/or let me know via email.
+**If you have any features to suggest, or bugs to report, please create a new issue and/or let me know via email.**
 
 ## How it Works
 
