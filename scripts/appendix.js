@@ -4,7 +4,6 @@ const getAscii = (
     image = null,
     imageW = undefined,
     imageH = undefined,
-    draw = canvasElement,
     color = false
 ) => {
     // set the canvas element's dimensions to imageW and imageH if defined,
@@ -107,6 +106,9 @@ const resetMedia = (newRes = resolution) => {
 };
 
 const refresh = (updateSliders = true) => {
+    console.log("resolution in refresh:");
+    console.log({ resolution });
+
     if (updateSliders) widthSliderElement.value = resolution[0];
     widthDisplayElement.innerHTML = resolution[0];
     widthPixelsDisplayElement.innerHTML =
@@ -115,4 +117,14 @@ const refresh = (updateSliders = true) => {
     if (updateSliders) heightSliderElement.value = resolution[1];
     heightDisplayElement.innerHTML = resolution[1];
     heightPixelsDisplayElement.innerHTML = resolution[1] * fontSize;
+};
+
+const refreshMax = () => {
+    maxResolution = [
+        maxCameraResolution[0] / fontSize / widthFactor,
+        maxCameraResolution[1] / fontSize,
+    ];
+
+    widthSliderElement.max = maxResolution[0];
+    heightSliderElement.max = maxResolution[1];
 };

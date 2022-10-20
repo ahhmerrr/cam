@@ -64,10 +64,7 @@ screenElement.style.fontSize = `${fontSize}px`;
 let widthFactor = 0.5;
 // pixel resolution in characters (NOT pixels)
 
-// let maxResolution = [
-//     window.innerWidth / fontSize / widthFactor,
-//     window.innerHeight / fontSize,
-// ];
+let maxCameraResolution = [0, 0];
 let maxResolution = [0, 0];
 let resolution = [0, 0];
 

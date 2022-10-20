@@ -199,7 +199,7 @@ Adjusting brightness is easier; you simply add the brightness modifier:
 We also have to keep the values of each color in the interval $[0, 255]$. I did this in my program using a `clamp` function that I defined in `Number.prototype`, but for simplicity, here I am only using some `if` statements.
 
 Finally, we have to calculate the perceived brightness of the pixel. Remember that no screen color is "dark" or "light": it's the way our eyes *view* those colors that make them so. A formula (one of many) for computing perceived brightness is:
-    $B=0.2126*r+0.7152*g+0.0722b$
+    $$B=0.2126*r+0.7152*g+0.0722b$$
 where $r$, $g$, and $b$ are the pixel's red, green, and blue values. This formula is based on the idea that the human eye is most sensitive to green light, then red, and then blue.
 
 Once we have our perceived brightness, we are now ready to convert the pixel to an ASCII character. First, though, we need a palette of characters to choose from. The larger your palette, the more pixel "diversity" and the better gradients and contours will look. I chose the following character palette:

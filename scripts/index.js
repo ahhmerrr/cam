@@ -1,4 +1,5 @@
 // TODO: implement "flip" button
+// TODO: change font size to "resolution" and implement "zoom"
 
 let globalMedia = null;
 
@@ -29,14 +30,12 @@ navigator.mediaDevices
             }
         }
 
-        maxResolution = [
-            globalMedia.getVideoTracks()[0].getSettings().width /
-                fontSize /
-                widthFactor,
-            globalMedia.getVideoTracks()[0].getSettings().height / fontSize,
+        maxCameraResolution = [
+            globalMedia.getVideoTracks()[0].getSettings().width,
+            globalMedia.getVideoTracks()[0].getSettings().height,
         ];
-        widthSliderElement.max = maxResolution[0];
-        heightSliderElement.max = maxResolution[1];
+
+        refreshMax();
         refresh();
 
         startBtnElement.addEventListener("click", () => resetMedia());

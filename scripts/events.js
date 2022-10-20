@@ -55,18 +55,25 @@ fontSliderElement.addEventListener("input", () => {
     fontDisplayElement.innerHTML = fontSize;
 
     refresh(false);
+    resetMedia();
 });
 
 widthSliderElement.addEventListener("input", () => {
-    resolution[0] = widthSliderElement.value / fontSize / widthFactor;
+    console.log(heightSliderElement.value);
+    resolution[0] = widthSliderElement.value;
 
+    console.log({ maxResolution });
+    console.log({ resolution });
     refresh(false);
     resetMedia();
 });
 
 heightSliderElement.addEventListener("input", () => {
-    resolution[1] = heightSliderElement.value / fontSize;
+    resolution[1] = heightSliderElement.value;
+    console.log(`value of height slider: ${heightSliderElement.value}`);
 
+    console.log({ maxResolution });
+    console.log({ resolution });
     refresh(false);
     resetMedia();
 });
