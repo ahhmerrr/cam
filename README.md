@@ -4,7 +4,7 @@
 
 See your face as a pool of $'s, ]'s, and ^'s.
 
-View live @ [ahhmerrr.github.io/cam](https://ahhmerrr.github.io/cam/)
+View live @ [ahhmerrr.github.io/cam](https://ahmrr.github.io/cam/)
 
 **If you have any features to suggest, or bugs to report, please create a new issue and/or let me know via email.**
 
